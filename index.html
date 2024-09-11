@@ -17,6 +17,12 @@
       const map= new Map({
         basemap: "arcgis-dark-gray",
         basemap: "topo"
+      let basemapGallery = new basemapGallery ({
+        view: view
+      });
+      vie.ui.add(basemapGallery, {
+        position: "top-right"
+      });
       });
 
       const view = new MapView ({
