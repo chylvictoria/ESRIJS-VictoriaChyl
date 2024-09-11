@@ -15,7 +15,8 @@
     ], function (esriConfig, Map, MapView) {
       esriConfig.apiKey = "AAPTxy8BH1VEsoebNVZXo8HurPdal7xKMR_ut0U_ESVfLcI_px_z7ykD-J-ClO46p73SMP-2Wwv7H0--83JznnmrUSSxW2vvSY6QMWHRRDVLOwgBALsBPSbkEtmiOj1Hbq3t_hNHYjPcPPcZmGTFbRLdlpaC2lw0GfcyOdRhAZoVirXeEW7sV5nU4qAClQG1ImUrao0BqTFdjY7p55Da7eB0WTe0WYyjmWCYCQrvjWdW9_o90V69Zj_cC9eebG-yTzEUAT1_7mIpUhiu";
       const map= new Map({
-        basemap: "arcgis-dark-gray-vector"
+        basemap: "arcgis-dark-gray",
+        basemap: "topo"
       });
 
       const view = new MapView ({
@@ -23,7 +24,7 @@
         center: [-112.0740, 33.4483],
         zoom: 16,
         container: "viewDiv",
-        scale: 24000
+        scale: 30000
       });
 
     });
