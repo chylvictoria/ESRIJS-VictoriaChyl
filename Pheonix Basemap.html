@@ -3,67 +3,81 @@
 <head>
   <title>Hello, world!</title>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,inital-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="" />
   <link rel="stylesheet" href="https://js.arcgis.com/4.25/esri/themes/light/main.css">
   <script src="https://js.arcgis.com/4.25/"></script>
-  <script> 
+  <script>
     require([
-      "esri/config", 
-      "esri/Map", 
+      "esri/config",
+      "esri/Map",
       "esri/views/MapView",
-      "esri/widgets/BasemapGallery",
+      "esri/widgets/Locate",
       "esri/widgets/Search",
-       "esri/widgets/Locate"
-    ], function (esriConfig, Map, MapView, BasemapGallery, Search, Locate) {
-      esriConfig.apiKey = "AAPT85fOqywZsicJupSmVSCGrggxj7PU2K_-YNiAQQ5piR-noEd9ltUQXVcOBiLLbyQKfTdvkwGXcNqF8aLG47vkoVyuYpUjFwxrZUqr7jWEXmkIFgDm7V1HzAXo666OQG2yqMLjcQWo2O7frGOeuAe3R8YNfW7yFPLggivpw440OJv1mlf2kY20h3J4Ipi26vSK57u8N4CjR5UInnqvP8gjdf10lQnnFqsrjcv98sdZ8ZjCjI4ln5zVF80jwFJPV-YWAT2_7mIpUhiu";
-      const map= new Map({
-        basemap: "national-geographic"
+      "esri/Basemap",
+      "esri/widgets/BasemapGallery",
+      "esri/widgets/Expand"
+    ], function (esriConfig, Map, MapView, Locate, Search, Basemap, BasemapGallery, Expand) {
+      // Set your valid API key here
+      esriConfig.apiKey = "AAPTxy8BH1VEsoebNVZXo8HurPdal7xKMR_ut0U_ESVfLcI_px_z7ykD-J-ClO46p73SMP-2Wwv7H0--83JznnmrUSSxW2vvSY6QMWHRRDVLOwgBALsBPSbkEtmiOj1Hbq3t_hNHYjPcPPcZmGTFbRLdlpaC2lw0GfcyOdRhAZoVirXeEW7sV5nU4qAClQG1ImUrao0BqTFdjY7p55Da7eB0WTe0WYyjmWCYCQrvjWdW9_o90V69Zj_cC9eebG-yTzEUAT1_7mIpUhiu-WvGKMC_3Dsn_jXYcMun8JAnQgKi3Hgp4q13-EZXqNdXc1sftxPFgsnUsTk00xvJXveWlRhCD1rYgOl6etkqPlnOapMpQCgDhIKlyIikdJpX-YjSjgN8FVFWFw7jrGd6HRRDx4XhIgOE95yumVlsggr_mwOtZr3YLj1UAT1_xSqCBFt5";
+
+      // Create a new Map instance with a basemap
+      const map = new Map({
+        basemap: "topo" // Basemap layer
       });
-  
-      const view = new MapView ({
+
+      // Create a MapView instance and reference the Map instance
+      const view = new MapView({
         map: map,
-        center: [-112.0740, 33.4483],
-        zoom: 16,
-        container: "viewDiv",
-        scale: 30000
+        center: [-112.0740, 33.4483], // Longitude, latitude
+        zoom: 10, // Zoom level
+        container: "viewDiv" // Div element to hold the view
       });
 
+      // Create Locate widget
+      const locate = new Locate({
+        view: view,
+        useHeadingEnabled: false,
+        goToOverride: function(view, options) {
+          options.target.scale = 1500;
+          return view.goTo(options.target);
+        }
+      });
 
-      const basemapGallery = new BasemapGallery ({
+      // Add Locate widget to the top-left corner
+      view.ui.add(locate, "top-left");
+
+      // Create Search widget
+      const search = new Search({
+        view: view
+      });
+
+      // Add Search widget to the top-right corner
+      view.ui.add(search, "top-right");
+
+      // BasemapGallery Widget setup
+      const basemapGallery = new BasemapGallery({
         view: view,
         source: [
-          Basemap.formId("streets"),
-          Basemap.formId("satellite"),
-          Basemap.formId("hybrid"),
-          Basemap.formId("topo"),
-          Basemap.formId("gray"),
-          Basemap.formId("dark-gray"),
-          Basemap.formId("oceans"),
-          Basemap.formId("national-geographic"),
-          Basemap.formId("terrain"),
-          Basemap.formId("osm"),
+          Basemap.fromId("streets"),
+          Basemap.fromId("satellite"),
+          Basemap.fromId("topo"),
+          Basemap.fromId("oceans"),
+          Basemap.fromId("terrain"),
+          Basemap.fromId("osm")
         ]
       });
-      
-        
-    
-      const search= new Search ({
-        view: MapView
+
+      // Optional: Use Expand widget to collapse BasemapGallery
+      const bgExpand = new Expand({
+        view: view,
+        content: basemapGallery, // BasemapGallery widget content
+        group: "top-right"
       });
-        view.ui.add(search, "top-right");
 
-
-      const locateBtn = new Locate({
-          view: MapView 
-           });
-
-          view.ui.add(locateBtn, "top-right");
-     
-    });  
-     
-        
-
+      // Add BasemapGallery widget to the top-right corner
+      view.ui.add(bgExpand, "top-right"); // Display BasemapGallery in the top-right corner
+    });
   </script>
   <style>
     html,
@@ -75,10 +89,8 @@
       width: 100%;
     }
   </style>
-
 </head>
 <body>
   <div id="viewDiv"></div>
 </body>
 </html>
-
