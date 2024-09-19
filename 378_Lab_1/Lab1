@@ -1,0 +1,51 @@
+Lab 1 trapezoid or triangle
+
+#Asks whether to calculate triangle or trapezoid area
+    print("Would you like to find the area of a triangle or a trapezoid?")
+#Determine what code should be used
+    triangle= 
+#If user says triangle code for area 
+
+
+
+
+
+#Triangle
+
+        # Prints the statement below
+        print("This program finds the area of a triangle.\n")
+
+        # Enters values for the height and base parameters
+        height = input("Please enter the height of the triangle: ")
+        base = input("Please enter the base length of the triangle: ")
+
+        # Changes the inputs from integers to float values
+        height = float(height)
+        base = float(base)
+
+        # Calculates the area of the triangle based on float values
+        area = 0.5 * height * base
+
+        # Prints final statement of the height, base, and area. 
+        print("The area of a triangle with height", height, "and base", base, "is", area, ".")
+
+# Trapezoid
+
+        # Prints the statement below
+        print("This program finds the area of a trapezoid.\n")
+
+        # Enters values for the height and base parameters
+        height = input("Please enter the height of the trapezoid: ")
+        base1 = input("Please enter first base length of the trapezoid: ")
+        base2 = input ("Please enter second base length of the trapezoid: ")
+
+        # Changes the inputs from integers to float values
+        height = float(height)
+        base1 = float(base1)
+        base2 = float(base2)
+
+        # Calculates the area of the trapezoid based on float values
+        area = ((base1 + base2)/ 2) * height
+
+        # Prints final statement of the height, base, and area. 
+        print("The area of a trapezoid with height", height, ", first base", base1, "and second base", base2, "is", area)

@@ -11,12 +11,14 @@
     require([
       "esri/config", 
       "esri/Map", 
-      "esri/views/MapView"
-    ], function (esriConfig, Map, MapView) {
-      esriConfig.apiKey = "AAPTxy8BH1VEsoebNVZXo8HurPdal7xKMR_ut0U_ESVfLcI_px_z7ykD-J-ClO46p73SMP-2Wwv7H0--83JznnmrUSSxW2vvSY6QMWHRRDVLOwgBALsBPSbkEtmiOj1Hbq3t_hNHYjPcPPcZmGTFbRLdlpaC2lw0GfcyOdRhAZoVirXeEW7sV5nU4qAClQG1ImUrao0BqTFdjY7p55Da7eB0WTe0WYyjmWCYCQrvjWdW9_o90V69Zj_cC9eebG-yTzEUAT1_7mIpUhiu";
+      "esri/views/MapView",
+      "esri/widgets/BasemapGallery",
+      "esri/widgets/Search",
+       "esri/widgets/Locate"
+    ], function (esriConfig, Map, MapView, BasemapGallery, Search, Locate) {
+      esriConfig.apiKey = "AAPT85fOqywZsicJupSmVSCGrggxj7PU2K_-YNiAQQ5piR-noEd9ltUQXVcOBiLLbyQKfTdvkwGXcNqF8aLG47vkoVyuYpUjFwxrZUqr7jWEXmkIFgDm7V1HzAXo666OQG2yqMLjcQWo2O7frGOeuAe3R8YNfW7yFPLggivpw440OJv1mlf2kY20h3J4Ipi26vSK57u8N4CjR5UInnqvP8gjdf10lQnnFqsrjcv98sdZ8ZjCjI4ln5zVF80jwFJPV-YWAT2_7mIpUhiu";
       const map= new Map({
-        basemap: "arcgis-dark-gray",
-        basemap: "topo",
+        basemap: "national-geographic"
       });
   
       const view = new MapView ({
@@ -26,7 +28,39 @@
         container: "viewDiv",
         scale: 30000
       });
-    });
+
+
+      // const basemapGallery = new BasemapGallery ({
+      //   view: view,
+      //   source: [
+      //     Basemap.formId("streets"),
+      //     Basemap.formId("satellite"),
+      //     Basemap.formId("hybrid"),
+      //     Basemap.formId("topo"),
+      //     Basemap.formId("gray"),
+      //     Basemap.formId("dark-gray"),
+      //     Basemap.formId("oceans"),
+      //     Basemap.formId("national-geographic"),
+      //     Basemap.formId("terrain"),
+      //     Basemap.formId("osm"),
+      //   ]
+      // });
+      
+        
+    
+      const search= new Search ({
+        view: MapView
+      });
+        view.ui.add(search, "top-right");
+
+
+      const locateBtn = new Locate({
+          view: MapView 
+           });
+
+          view.ui.add(locateBtn, "top-right");
+     
+    });  
      
         
 
