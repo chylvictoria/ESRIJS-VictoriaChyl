@@ -23,7 +23,7 @@
 
       // Create a new Map instance with a basemap
       const map = new Map({
-        basemap: "topo" // Basemap layer
+        basemap: "oceans" // Basemap layer
       });
 
       // Create a MapView instance and reference the Map instance
@@ -59,9 +59,9 @@
       const basemapGallery = new BasemapGallery({
         view: view,
         source: [
-          Basemap.fromId("streets/streets-vector"),
+          Basemap.fromId("hybrid"),
           Basemap.fromId("satellite"),
-          Basemap.fromId("topo/topo-vector"),
+          Basemap.fromId("streets-vector"),
           Basemap.fromId("oceans"),
           Basemap.fromId("terrain"),
           Basemap.fromId("osm")
